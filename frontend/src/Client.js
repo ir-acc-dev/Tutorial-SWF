@@ -11,3 +11,5 @@ export const deleteTask = (id) => axios.delete(BASE_URL + "/" + id);
 export const getTaskById = (id) => axios.get(BASE_URL + "/" + id);
 
 export const updateTask = (task, id) => axios.put(BASE_URL + "/" + id, task)
+
+export const toggleCompletion = (id) => axios.put(BASE_URL + "/" + id + "/complete")
