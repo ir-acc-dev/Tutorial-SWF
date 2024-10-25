@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { Container, Typography, Box, TextField, Button} from '@mui/material';
-import {useNavigate} from "react-router-dom";
-import {createTask} from "../Client.js";
+import {useNavigate, useParams} from "react-router-dom";
+import {createTask, getTaskById, updateTask} from "../Client.js";
 
 const ModifyDetails = () => {
 
@@ -9,20 +9,42 @@ const ModifyDetails = () => {
     const taskComplete = false;
     const navigator = useNavigate();
 
+    const {id} = useParams();
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const newTask = {description, taskComplete};
 
-        createTask(newTask)
-            .then((response) => {
-                console.log(response.data);
-                navigator("/tasks");
+        if(id) {
+            updateTask(newTask, id).then((response) => {
+                console.log(response.data)
+                navigator("/tasks")
+            }).catch((error) => {
+                console.error(error)
             })
-            .catch((error) => {
-                console.error(error);
-            });
+        } else {
+            createTask(newTask)
+                .then((response) => {
+                    console.log(response.data);
+                    navigator("/tasks");
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
     };
+
+
+    useEffect(() => {
+        if(id) {
+            getTaskById(id).then((response) => {
+                setDescription(response.data.description);
+            }).catch((error) => {
+                console.error(error)
+            })
+        }
+    }, [id]);
 
     return (
         <Container>

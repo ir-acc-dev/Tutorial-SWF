@@ -7,7 +7,7 @@ export const getAllTasks = () => axios.get(BASE_URL);
 export const createTask = (task) => axios.post(BASE_URL, task)
 
 export const deleteTask = (id) => axios.delete(BASE_URL + "/" + id);
-//
-// export const getEntryById = (id:number) => axios.get(BASE_URL + "/" + id);
-//
-// export const updateEntry = (entry: any, id: any) => axios.put(BASE_URL + "/" + id, entry)
+
+export const getTaskById = (id) => axios.get(BASE_URL + "/" + id);
+
+export const updateTask = (task, id) => axios.put(BASE_URL + "/" + id, task)

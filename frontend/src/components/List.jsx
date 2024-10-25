@@ -1,6 +1,6 @@
 import {Box, Button, Checkbox, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
-import {getAllTasks} from "../Client.js";
+import {deleteTask, getAllTasks} from "../Client.js";
 import {useNavigate} from "react-router-dom";
 
 const List = () => {
@@ -25,6 +25,20 @@ const List = () => {
 
     const addNewTask = () => {
         navigator("/add-task")
+    };
+
+    const removeTask = (id) => {
+        deleteTask(id)
+            .then(() => {
+                listAllTasks();
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
+    const viewDetails = (id) => {
+        navigator(`/edit-task/${id}`)
     };
 
     return (
@@ -53,8 +67,8 @@ const List = () => {
                                     </TableCell>
                                     <TableCell>{task.description}</TableCell>
                                     <TableCell>
-                                        <Button>Edit</Button>
-                                        <Button>Delete</Button>
+                                        <Button onClick={() => viewDetails(task.id)}>Edit</Button>
+                                        <Button onClick={() => {removeTask(task.id)}}>Delete</Button>
                                     </TableCell>
                                 </TableRow>
                             ))}
