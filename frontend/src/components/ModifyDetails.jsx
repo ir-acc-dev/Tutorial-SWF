@@ -35,7 +35,6 @@ const ModifyDetails = () => {
         }
     };
 
-
     useEffect(() => {
         if(id) {
             getTaskById(id).then((response) => {
