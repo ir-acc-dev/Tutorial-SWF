@@ -1,6 +1,7 @@
 import {Box, Button, Checkbox, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
 import {getAllTasks} from "../Client.js";
+import {useNavigate} from "react-router-dom";
 
 const List = () => {
 
@@ -20,13 +21,19 @@ const List = () => {
         listAllTasks();
     }, []);
 
+    const navigator = useNavigate();
+
+    const addNewTask = () => {
+        navigator("/add-task")
+    };
 
     return (
         <div>
             <Box>
                 {/* Title and Button Box */}
                 <Box>
-                    <Typography variant="h4" className="title">Travel Entries</Typography>
+                    <Typography variant="h4" className="title">Tasks List</Typography>
+                    <Button onClick={addNewTask}>Add Task</Button>
                 </Box>
 
                 <TableContainer component={Paper}>

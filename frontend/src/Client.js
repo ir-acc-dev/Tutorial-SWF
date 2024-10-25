@@ -4,9 +4,9 @@ const BASE_URL = 'http://localhost:8080/api/tasks'
 
 export const getAllTasks = () => axios.get(BASE_URL);
 
-// export const createEntry = (entry: any) => axios.post(BASE_URL, entry)
-//
-// export const deleteEntry = (entryId:number) => axios.delete(BASE_URL + "/" + entryId);
+export const createTask = (task) => axios.post(BASE_URL, task)
+
+export const deleteTask = (id) => axios.delete(BASE_URL + "/" + id);
 //
 // export const getEntryById = (id:number) => axios.get(BASE_URL + "/" + id);
 //
