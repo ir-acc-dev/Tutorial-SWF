@@ -1,6 +1,6 @@
 import {Box, Button, Checkbox, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
-import {deleteTask, getAllTasks} from "../Client.js";
+import {deleteTask, getAllTasks, toggleCompletion} from "../Client.js";
 import {useNavigate} from "react-router-dom";
 
 const List = () => {
@@ -41,6 +41,21 @@ const List = () => {
         navigator(`/edit-task/${id}`)
     };
 
+    const handleToggleCompletion = (id) => {
+        toggleCompletion(id)
+            .then((response) => {
+                const updatedTask = response.data;
+                setTasks((prevTasks) =>
+                    prevTasks.map((task) =>
+                        task.id === id ? { ...task, taskComplete: updatedTask.taskComplete } : task
+                    )
+                );
+            })
+            .catch((error) => {
+                console.error("Error toggling completion:", error);
+            });
+    };
+
     return (
         <div>
             <Box>
@@ -63,7 +78,7 @@ const List = () => {
                             {tasks.map((task) => (
                                 <TableRow key={task.id} className="table-row">
                                     <TableCell>
-                                        <Checkbox checked={task.taskComplete} />
+                                        <Checkbox checked={task.taskComplete} onChange={() => handleToggleCompletion(task.id)} />
                                     </TableCell>
                                     <TableCell>{task.description}</TableCell>
                                     <TableCell>
