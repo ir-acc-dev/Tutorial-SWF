@@ -7,7 +7,7 @@ const Header = () => {
             <AppBar position="static">
                 <Toolbar>
 
-                    <Typography variant="h6" sx={{ flexGrow: 1 }}> App Name </Typography>
+                    <Typography variant="h6" sx={{ flexGrow: 1 }}> TaskManager </Typography>
 
                     <Box sx={{ display: 'flex' }}>
                         <Button component={NavLink} to="/" color="inherit"  sx={{ textTransform: 'none' }}> Home </Button>
