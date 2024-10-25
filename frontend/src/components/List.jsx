@@ -58,8 +58,9 @@ const List = () => {
 
     return (
         <div>
+
             <Box>
-                {/* Title and Button Box */}
+
                 <Box>
                     <Typography variant="h4" className="title">Tasks List</Typography>
                     <Button onClick={addNewTask}>Add Task</Button>
@@ -90,7 +91,9 @@ const List = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+
             </Box>
+
         </div>
     );
 };
